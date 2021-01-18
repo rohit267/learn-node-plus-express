@@ -1,6 +1,19 @@
 const express = require("express");
 const path = require("path");
+const exphbs = require("express-handlebars");
 const app = express();
+const members = require("./members");
+
+// Express Handlebars
+app.engine("handlebars", exphbs());
+app.set("view engine", "handlebars");
+
+app.get("/", function (req, res) {
+  res.render("index", {
+    title: "Member App",
+    members
+  }); // using hadlebars
+});
 
 //Set static folder
 app.use(express.static(path.join(__dirname, "public")));
